@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Capture Overlay</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        #overlayCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="overlayCanvas"></canvas>
+
+    <script>
+        let startX, startY, endX, endY;
+        const canvas = document.getElementById("overlayCanvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        function drawOverlay() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 전체 화면을 반투명한 검정색으로 채움
+            ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            if (startX && startY && endX && endY) {
+                // 선택 영역 계산
+                const x = Math.min(startX, endX);
+                const y = Math.min(startY, endY);
+                const width = Math.abs(endX - startX);
+                const height = Math.abs(endY - startY);
+
+                // destination-out을 사용하여 선택 영역을 완전 투명하게 만듦
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+                ctx.fillRect(x, y, width, height);
+                ctx.globalCompositeOperation = 'source-over';
+            }
+        }
+
+        canvas.addEventListener("mousedown", (e) => {
+            startX = e.clientX;
+            startY = e.clientY;
+        });
+
+        canvas.addEventListener("mousemove", (e) => {
+            if (!startX || !startY) return;
+            endX = e.clientX;
+            endY = e.clientY;
+            drawOverlay();
+        });
+
+        canvas.addEventListener("mouseup", () => {
+            if (!startX || !startY || !endX || !endY) return;
+
+            const bounds = {
+                x: Math.min(startX, endX),
+                y: Math.min(startY, endY),
+                width: Math.abs(endX - startX),
+                height: Math.abs(endY - startY),
+            };
+
+            // 캡처 요청
+            window.electron.captureScreen(bounds);
+            
+            // 오버레이 닫기
+            window.electron.closeOverlay();
+        });
+
+        drawOverlay();
+    </script>
+</body>
+</html>
