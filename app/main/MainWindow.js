@@ -6,7 +6,7 @@ class MainWindow extends BrowserWindow {
         super(
             {
                 title: "OCRJS",
-                width: isDev ? 700 : 355,
+                width: isDev ? 1200 : 800,
                 height: 500,
                 resizable: isDev ? true : false,
                 // show: false,

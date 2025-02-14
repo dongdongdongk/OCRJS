@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Screen Capture App</title>
-    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="./style/index.css">
 </head>
 <body>
     <div class="container">
@@ -10,8 +10,12 @@
         <div class="shortcut">
             Press <strong>Alt + Shift + S</strong> to start capture
         </div>
+        <div id="preview-container">
+            <img id="screenshot-preview" src="" alt="Captured Screenshot">
+        </div>
+        <button id="open-folder">Open Folder</button>
         <p>ESC to cancel capture</p>
     </div>
+    <script src="renderer.js"></script>
 </body>
 </html>
-

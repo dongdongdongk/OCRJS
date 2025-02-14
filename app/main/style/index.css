@@ -1,0 +1,35 @@
+#preview-container {
+    margin: 20px 0;
+    border: 2px dashed #ccc;
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#screenshot-preview {
+    max-width: 80%;
+    max-height: 350px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    display: none; /* 초기에 숨김 */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#screenshot-preview:hover {
+    transform: scale(1.02);
+}
+
+#open-folder {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#open-folder:hover {
+    background-color: #005bb5;
+}
