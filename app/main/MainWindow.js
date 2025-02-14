@@ -6,11 +6,11 @@ class MainWindow extends BrowserWindow {
         super(
             {
                 title: "OCRJS",
-                width: isDev ? 1200 : 800,
-                height: 500,
+                width: isDev ? 1500 : 1200,
+                height: 800,
                 resizable: isDev ? true : false,
                 // show: false,
-                opacity: 0.9,
+                // opacity: 0.9,
                 backgroundColor: "white",
                 webPreferences: {
                     nodeIntegration: false,

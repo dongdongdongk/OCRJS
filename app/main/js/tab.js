@@ -25,3 +25,4 @@ function hideAllItems() {
 		item.classList.remove('active')
 	})
 }
+

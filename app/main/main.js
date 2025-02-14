@@ -3,7 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const MainWindow = require("./MainWindow");
 
-process.env.NODE_ENV = "development";
+process.env.NODE_ENV = "production"; // development
 
 const isDev = process.env.NODE_ENV !== "production" ? true : false;
 const isMac = process.platform === "darwin" ? true : false;
