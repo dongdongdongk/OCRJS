@@ -11,6 +11,7 @@ class MainWindow extends BrowserWindow {
                 resizable: isDev ? true : false,
                 // show: false,
                 // opacity: 0.9,
+                frame: false,
                 backgroundColor: "white",
                 webPreferences: {
                     nodeIntegration: false,

@@ -8,4 +8,8 @@ contextBridge.exposeInMainWorld("electron", {
 
     // 폴더 열기 요청
     openFolder: (path) => ipcRenderer.send("open-folder", path),
+
+    send: (channel, data) => {
+        ipcRenderer.send(channel, data);
+    }
 });

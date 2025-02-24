@@ -21,3 +21,13 @@ document.getElementById('open-folder').addEventListener('click', () => {
         alert("No captured image found!");
     }
 });
+
+
+document.querySelector('.window-control.minimize').addEventListener('click', () => {
+    window.electron.send('minimize-window');
+});
+
+
+document.querySelector('.window-control.close').addEventListener('click', () => {
+    window.electron.send('close-window');
+});

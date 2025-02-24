@@ -3,43 +3,60 @@
 
 <head>
 	<title>Dong.k OCR</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css" />
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css" />
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css" />
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css" />
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css" />
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css" />
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
 	<!--===============================================================================================-->
 </head>
 
 <body>
+	<div class="custom-titlebar">
+		<div class="titlebar-drag-region"></div>
+		<div class="window-title">Dong.k OCR</div>
+		<div class="window-controls">
+			<button class="window-control minimize">
+				<svg width="12" height="2" viewBox="0 0 12 2">
+					<rect width="12" height="2" fill="currentColor" />
+				</svg>
+			</button>
+			<button class="window-control maximize">
+				<svg width="12" height="12" viewBox="0 0 12 12">
+					<rect width="10" height="10" x="1" y="1" stroke="currentColor" fill="none" stroke-width="1" />
+				</svg>
+			</button>
+			<button class="window-control close">
+				<svg width="12" height="12" viewBox="0 0 12 12">
+					<path d="M1 1l10 10M1 11L11 1" stroke="currentColor" stroke-width="1.5" />
+				</svg>
+			</button>
+		</div>
+	</div>
 
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
-					<img src="images/img-01.png" alt="IMG">
+					<img src="images/img-01.png" alt="IMG" />
 
-					<span class="login100-form-title">
-						Alt + Shift + S
-					</span>
+					<span class="login100-form-title"> Alt + Shift + S </span>
 				</div>
 
 				<form class="login100-form validate-form">
-					<span class="login100-form-title">
-						Dong.K OCR 캡쳐
-					</span>
+					<span class="login100-form-title"> Dong.K OCR 캡쳐 </span>
 
 					<!-- <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="text" name="email" placeholder="Email">
@@ -57,7 +74,7 @@
 						</span>
 					</div> -->
 					<div id="preview-container">
-						<img id="screenshot-preview" src="" alt="Captured Screenshot">
+						<img id="screenshot-preview" src="" alt="Captured Screenshot" />
 					</div>
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" id="open-folder">
@@ -69,9 +86,6 @@
 		</div>
 	</div>
 
-
-
-
 	<!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
@@ -82,14 +96,13 @@
 	<!--===============================================================================================-->
 	<script src="vendor/tilt/tilt.jquery.min.js"></script>
 	<script>
-		$('.js-tilt').tilt({
-			scale: 1.1
-		})
+		$(".js-tilt").tilt({
+			scale: 1.1,
+		});
 	</script>
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
 	<script src="renderer.js"></script>
-
 </body>
 
 </html>

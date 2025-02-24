@@ -491,6 +491,70 @@ iframe {
   background-color: #005bb5;
 }
 
+
+.custom-titlebar {
+  height: 32px;
+  background: #2c3e50;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  -webkit-app-region: drag;
+  z-index: 9999;
+}
+
+.titlebar-drag-region {
+  flex: 1;
+  -webkit-app-region: drag;
+}
+
+.window-title {
+  color: #fff;
+  font-size: 14px;
+  margin-right: auto;
+  margin-left: 8px;
+}
+
+.window-controls {
+  display: flex;
+  gap: 8px;
+  -webkit-app-region: no-drag;
+}
+
+.window-control {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.window-control:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.window-control.close:hover {
+  background: #e81123;
+}
+
+/* 기존 컨텐츠 위치 조정 */
+/* .limiter {
+  padding-top: 32px;
+} */
+
+
+
+
+
+
 @media (max-width: 992px) {
   .alert-validate::before {
     visibility: visible;
