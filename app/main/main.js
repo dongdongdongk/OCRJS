@@ -2,6 +2,7 @@ const { app, BrowserWindow, Menu, ipcMain, globalShortcut, desktopCapturer, scre
 const path = require("path");
 const fs = require("fs");
 const MainWindow = require("./MainWindow");
+const { exec } = require('child_process');
 
 process.env.NODE_ENV = "production"; // development
 
@@ -92,46 +93,36 @@ function createOverlayWindow() {
     });
 }
 
-// ✅ 캡처 요청을 받으면 스크린샷 촬영 후 저장
-ipcMain.on("capture-screen", async (event, bounds) => {
+// ✅ 캡처 요청을 받으면 Python을 실행하여 이미지 반환
+ipcMain.on("capture-screen", (event, bounds) => {
     try {
-        const { x, y, width, height } = bounds;
+        const pythonScriptPath = path.join(__dirname, "screen_capture.py");
 
-        // 전체 화면 캡처
-        const sources = await desktopCapturer.getSources({
-            types: ["screen"],
-            thumbnailSize: {
-                width: screen.getPrimaryDisplay().size.width,
-                height: screen.getPrimaryDisplay().size.height
+        // Python 프로세스를 실행하고 결과를 받음
+        const pythonProcess = exec(`python "${pythonScriptPath}"`, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`Error: ${error.message}`);
+                return;
             }
+            if (stderr) {
+                console.error(`stderr: ${stderr}`);
+                return;
+            }
+
+            // Python 스크립트에서 출력된 Base64 문자열
+            const base64Image = stdout.trim();
+            console.log("Base64:", base64Image);
+
+            // Electron 메인 윈도우로 Base64 이미지 전달
+            mainWindow.webContents.send('capture-complete', base64Image);
         });
 
-        const screenShot = sources[0];
-
-        // 실제 화면 크기와 썸네일 크기의 비율 계산
-        const displayWidth = screen.getPrimaryDisplay().size.width;
-        const displayHeight = screen.getPrimaryDisplay().size.height;
-        const thumbnailWidth = screenShot.thumbnail.getSize().width;
-        const thumbnailHeight = screenShot.thumbnail.getSize().height;
-
-        // 비율에 맞게 좌표 변환
-        const scaledBounds = {
-            x: Math.floor(x * (thumbnailWidth / displayWidth)),
-            y: Math.floor(y * (thumbnailHeight / displayHeight)),
-            width: Math.floor(width * (thumbnailWidth / displayWidth)),
-            height: Math.floor(height * (thumbnailHeight / displayHeight))
-        };
-
-        const image = screenShot.thumbnail.crop(scaledBounds);
-        const imagePath = path.join(app.getPath('pictures'), `screenshot_${Date.now()}.png`);
-        fs.writeFileSync(imagePath, image.toPNG());
-
-        // 캡처 완료 시 메인 윈도우에 이미지 경로 전송
-        if (mainWindow) {
-            mainWindow.webContents.send('capture-complete', imagePath);
-        }
+        // Electron → Python으로 좌표값 전달
+        console.log("Bounds:", bounds);
+        pythonProcess.stdin.write(JSON.stringify(bounds));
+        pythonProcess.stdin.end();
     } catch (error) {
-        console.error('Screenshot error:', error);
+        console.error("Screenshot error:", error);
     }
 });
 

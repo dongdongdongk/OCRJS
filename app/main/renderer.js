@@ -31,3 +31,11 @@ document.querySelector('.window-control.minimize').addEventListener('click', () 
 document.querySelector('.window-control.close').addEventListener('click', () => {
     window.electron.send('close-window');
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    // 캡처 완료 시 이미지 표시
+    window.electron.onCaptureComplete((base64Image) => {
+        document.getElementById("screenshot").src = `data:image/png;base64,${base64Image}`;
+    });
+});
